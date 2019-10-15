@@ -1,80 +1,83 @@
-import React, { Fragment, useState } from 'react';
-import { Button, Text, StyleSheet, View } from 'react-native';
-import {
-  Table,
-  Row,
-  Rows,
-  TableWrapper,
-  Col
-} from 'react-native-table-component';
+import React, { Component } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
+import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 
-const DetailScreen = props => {
-  const data = props.navigation.getParam('gameName');
-  const [tableHead, setTableHead] = useState([
-    '',
-    'Status',
-    'Score',
-    'Head3',
-    'Head4'
-  ]);
-  const [tableTitle, setTableTitle] = useState([
-    'Game1',
-    'Game2',
-    'Game3',
-    'Game4'
-  ]);
-  const [tableData, setTableData] = useState([
-    ['1', '2', '3', 'a'],
-    ['a', 'b', 'c', 'b'],
-    ['1', '2', '3', 'c'],
-    ['a', 'b', 'c', 'd']
-  ]);
+export default class DetailScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tableHead: ['GameID', 'Status', 'Score', 'StartGame'],
+      tableData: [
+        ['1', 'completed', '3', '4'],
+        ['2', 'In-progress', '0', 'd'],
+        ['3', 'completed', '200', '4'],
+        ['4', 'pending', '0', 'd']
+      ],
+      totalScore: 203
+    };
+  }
 
-  return (
-    <Fragment>
-      <View style={{ flexDirection: 'row' }}>
-        <Text style={{ fontSize: 20, fontWeight: '900' }}>Table For Game:</Text>
-        <Text style={{ marginTop: 5, fontSize: 20, marginLeft: 20 }}>
-          {data}
-        </Text>
-      </View>
+  _alertIndex(index) {
+    Alert.alert(`This is row ${index + 1}`);
+  }
+
+  render() {
+    const state = this.state;
+    const element = (data, index) => (
+      <TouchableOpacity
+        onPress={() =>
+          this.props.navigation.navigate({
+            routeName: 'StartGame',
+            params: {
+              GameNo: index + 1,
+              status: 'pending'
+            }
+          })
+        }
+      >
+        <View style={styles.btn}>
+          <Text style={styles.btnText}>Start Game</Text>
+        </View>
+      </TouchableOpacity>
+    );
+
+    return (
       <View style={styles.container}>
-        <Table borderStyle={{ borderWidth: 1 }}>
+        <Table borderStyle={{ borderColor: 'transparent' }}>
           <Row
-            data={tableHead}
-            flexArr={[1, 1, 1, 1, 1]}
+            data={state.tableHead}
             style={styles.head}
             textStyle={styles.text}
           />
-          <TableWrapper style={styles.wrapper}>
-            <Col
-              data={tableTitle}
-              style={styles.title}
-              heightArr={[28, 28]}
-              textStyle={styles.text}
-            />
-            <Rows
-              data={tableData}
-              flexArr={[1, 1, 1, 1]}
-              style={styles.row}
-              textStyle={styles.text}
-            />
-          </TableWrapper>
+          {state.tableData.map((rowData, index) => (
+            <TableWrapper key={index} style={styles.row}>
+              {rowData.map((cellData, cellIndex) => (
+                <Cell
+                  key={cellIndex}
+                  data={cellIndex === 3 ? element(cellData, index) : cellData}
+                  textStyle={styles.text}
+                />
+              ))}
+            </TableWrapper>
+          ))}
         </Table>
+        <View style={{ flexDirection: 'row', marginLeft: 100 }}>
+          <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Total Score:</Text>
+          <Text style={{ fontSize: 15 }}>{this.state.totalScore}</Text>
+        </View>
       </View>
-    </Fragment>
-  );
-};
-DetailScreen.navigationOptions = {
-  headerTitle: 'Game Status'
-};
+    );
+  }
+}
+
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
-  head: { height: 40, backgroundColor: '#f1f8ff' },
-  wrapper: { flexDirection: 'row' },
-  title: { flex: 1, backgroundColor: '#f6f8fa' },
-  row: { height: 28 },
-  text: { textAlign: 'center' }
+  head: { height: 40, backgroundColor: '#808B97' },
+  text: { margin: 6 },
+  row: { flexDirection: 'row', backgroundColor: '#FFF1C1' },
+  btn: { width: 58, height: 18, backgroundColor: '#78B7BB', borderRadius: 2 },
+  btnText: { textAlign: 'center', color: '#fff' }
 });
-
-export default DetailScreen;
+DetailScreen.navigationOptions = {
+  headerTitle: 'Details'
+};

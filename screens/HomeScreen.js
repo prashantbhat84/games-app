@@ -6,43 +6,78 @@ const HomeScreen = props => {
   const renderListItem = itemData => {
     return (
       <Fragment>
-        <View style={styles.listItems}>
-          <View
-            style={{
-              fontWeight: 'bold',
-              height: 50,
-              marginLeft: 100,
-              fontSize: 20
-            }}
-          >
-            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-              {itemData.item.title}
-            </Text>
-          </View>
-          <View style={{ flexDirection: 'row', marginLeft: 100 }}>
-            <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Price:</Text>
-            <Text style={{ fontSize: 15 }}>{itemData.item.price}</Text>
-          </View>
+        {itemData.item.purchase === true ? (
+          <View style={styles.listItems}>
+            <View
+              style={{
+                fontWeight: 'bold',
+                height: 50,
+                marginLeft: 100,
+                fontSize: 20
+              }}
+            >
+              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                {itemData.item.title}
+              </Text>
+            </View>
+            <View style={{ flexDirection: 'row', marginLeft: 100 }}>
+              <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Price:</Text>
+              <Text style={{ fontSize: 15 }}>{itemData.item.price}</Text>
+            </View>
 
-          <View style={{ flexDirection: 'row' }}>
-            <View style={styles.buttonStyle}>
-              <Button title='Buy' />
-            </View>
-            <View style={styles.buttonStyle1}>
-              <Button
-                title='Enter'
-                onPress={() => {
-                  props.navigation.navigate({
-                    routeName: 'Detail',
-                    params: {
-                      gameName: itemData.item.title
-                    }
-                  });
-                }}
-              />
+            <View style={{ flexDirection: 'row' }}>
+              <View style={styles.buttonStyle1}>
+                <Button
+                  title='Enter'
+                  onPress={() => {
+                    props.navigation.navigate({
+                      routeName: 'Detail',
+                      params: {
+                        gameName: itemData.item.title
+                      }
+                    });
+                  }}
+                />
+              </View>
             </View>
           </View>
-        </View>
+        ) : (
+          <View style={styles.listItems}>
+            <View
+              style={{
+                fontWeight: 'bold',
+                height: 50,
+                marginLeft: 100,
+                fontSize: 20
+              }}
+            >
+              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                {itemData.item.title}
+              </Text>
+            </View>
+            <View style={{ flexDirection: 'row', marginLeft: 100 }}>
+              <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Price:</Text>
+              <Text style={{ fontSize: 15 }}>{itemData.item.price}</Text>
+            </View>
+
+            <View style={{ flexDirection: 'row' }}>
+              <View style={{ marginLeft: 110, marginTop: 20 }}>
+                <Button
+                  title='Buy'
+                  onPress={() => {
+                    props.navigation.navigate({
+                      routeName: 'Payment',
+                      params: {
+                        Price: itemData.item.price,
+                        GameName: itemData.item.title
+                      }
+                    });
+                  }}
+                />
+              </View>
+            </View>
+          </View>
+        )}
       </Fragment>
     );
   };
@@ -54,14 +89,14 @@ const HomeScreen = props => {
           {
             title: 'Prashant',
             id: '1',
-            purchase: false,
+            purchase: true,
             status: 'completed',
             price: '500'
           },
           {
             title: 'Sellcraft',
             id: '2',
-            purchase: true,
+            purchase: false,
             status: 'incomplete',
             price: '1500'
           }
