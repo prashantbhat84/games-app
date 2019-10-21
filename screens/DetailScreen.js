@@ -8,17 +8,12 @@ export default class DetailScreen extends Component {
     this.state = {
       tableHead: ['GameID', 'Status', 'Score', 'StartGame'],
       tableData: [
-        ['1', 'completed', '3', '4'],
+        ['1', 'Completed', '3', '4'],
         ['2', 'In-progress', '0', 'd'],
-        ['3', 'completed', '200', '4'],
-        ['4', 'pending', '0', 'd']
+        ['3', 'Completed', '200', '4']
       ],
       totalScore: 203
     };
-  }
-
-  _alertIndex(index) {
-    Alert.alert(`This is row ${index + 1}`);
   }
 
   render() {
@@ -30,13 +25,13 @@ export default class DetailScreen extends Component {
             routeName: 'StartGame',
             params: {
               GameNo: index + 1,
-              status: 'pending'
+              status: 'Pending'
             }
           })
         }
       >
         <View style={styles.btn}>
-          <Text style={styles.btnText}>Start Game</Text>
+          <Text style={styles.btnText}>Go to Game</Text>
         </View>
       </TouchableOpacity>
     );
@@ -76,7 +71,7 @@ const styles = StyleSheet.create({
   text: { margin: 6 },
   row: { flexDirection: 'row', backgroundColor: '#FFF1C1' },
   btn: { width: 58, height: 18, backgroundColor: '#78B7BB', borderRadius: 2 },
-  btnText: { textAlign: 'center', color: '#fff' }
+  btnText: { textAlign: 'center', color: '#fff', height: 150 }
 });
 DetailScreen.navigationOptions = {
   headerTitle: 'Details'

@@ -1,0 +1,29 @@
+{status === 'completed' || status === 'In-progress' ? (
+        <View>
+          <Text>This Game is in {status} mode. Please Try again Later</Text>
+        </View>
+      ) : (
+        <View>
+          <Text>This is the start Game Screen</Text>
+          <Text> Game no:{gameNo}</Text> {/* scan code to be here*/}
+        </View>
+      )}
+
+      
+
+      let arr1=[{name:'prashant',age:30},{name:'sai',age:'20'}];
+let output=[];
+
+for(i=0;i<arr1.length; i++){
+    let obj= arr1[i];
+ let arr=[];
+  arr[0]= obj.name;
+  arr[1]=obj.age
+  output.push(arr);
+}
+let status=[];
+output.map(arr2=>{
+  status.push(arr2[0]);
+  
+})
+  console.log(status[1])

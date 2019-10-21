@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "63237393870",
+    "firebase_url": "https://gaming-application-dba5c.firebaseio.com",
+    "project_id": "gaming-application-dba5c",
+    "storage_bucket": "gaming-application-dba5c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63237393870:android:a387800f0262bd4b382f9f",
+        "android_client_info": {
+          "package_name": "com.hyperinfinite.gaming"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "63237393870-dq529uokbjttrr44ngfsm1bqeu3kk0gr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6hr6ouVKjc1I-aQ2owGF_r4CQ9oyXUUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "63237393870-dq529uokbjttrr44ngfsm1bqeu3kk0gr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
