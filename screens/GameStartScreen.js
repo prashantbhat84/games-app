@@ -8,7 +8,7 @@ const GameStartScreen = props => {
   const status = props.navigation.getParam('status');
   return (
     <Fragment>
-      <Scan />
+      {status === 'Completed' || status === 'InProgress' ? null : <Scan />}
     </Fragment>
   );
 };
