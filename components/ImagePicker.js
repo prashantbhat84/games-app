@@ -6,6 +6,8 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import { Camera } from 'expo-camera';
 class Scan extends Component {
   constructor(props) {
+    console.log(props);
+
     super(props);
 
     this.onBarCodeRead = this.onBarCodeRead.bind(this);
@@ -47,17 +49,20 @@ class Scan extends Component {
     console.log(`QRCode scanned: ${data}`);
     console.log(type);
   }
+  navigate(prop) {
+    console.log(prop);
+  }
 
-  renderMessage() {
+  renderMessage(props) {
     if (this.state.scannedItem && this.state.scannedItem.type) {
       const { type, data } = this.state.scannedItem;
 
-      return (
-        <Text style={styles.scanScreenMessage}>{`Scanned  \n ${data}`}</Text>
-      );
+      this.navigate(props);
     }
     return (
-      <Text style={styles.scanScreenMessage}>Focus the barcode to scan.</Text>
+      <Text style={styles.scanScreenMessage}>
+        Focus the QRCode to scan for game {this.props.gameno}.
+      </Text>
     );
   }
 
@@ -82,13 +87,13 @@ class Scan extends Component {
     }
     return (
       <View style={styles.container}>
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, height: 300 }}>
           <BarCodeScanner
             onBarCodeScanned={this.onBarCodeRead}
             style={StyleSheet.absoluteFill}
             barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
           />
-          {this.renderMessage()}
+          {this.renderMessage(this.props)}
         </View>
       </View>
     );
@@ -99,7 +104,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    height: 500
   },
   scanScreenMessage: {
     fontSize: 20,
@@ -107,7 +113,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 100
+    marginTop: 300,
+    height: 300
   }
 });
 export default Scan;

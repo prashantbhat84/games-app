@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Button } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 
 export default class DetailScreen extends Component {
@@ -59,6 +59,12 @@ export default class DetailScreen extends Component {
         <View style={{ flexDirection: 'row', marginLeft: 100 }}>
           <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Total Score:</Text>
           <Text style={{ fontSize: 15 }}>{this.state.totalScore}</Text>
+        </View>
+        <View style={{ width: 150, marginLeft: 70, marginTop: 50 }}>
+          <Button
+            title='Go Home'
+            onPress={() => this.props.navigation.goBack()}
+          />
         </View>
       </View>
     );

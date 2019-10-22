@@ -4,6 +4,7 @@ import Home from '../screens/HomeScreen';
 import Details from '../screens/DetailScreen';
 import StartGame from '../screens/GameStartScreen';
 import Payment from '../screens/PaymentScreen';
+import GameProgress from '../screens/GameProgress';
 const gamesNavigator = createStackNavigator(
   {
     Home: {
@@ -17,6 +18,9 @@ const gamesNavigator = createStackNavigator(
     },
     Payment: {
       screen: Payment
+    },
+    GameProgress: {
+      screen: GameProgress
     }
   },
   {
