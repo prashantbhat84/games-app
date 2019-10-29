@@ -1,10 +1,12 @@
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import Home from '../screens/HomeScreen';
 import Details from '../screens/DetailScreen';
 import StartGame from '../screens/GameStartScreen';
 import Payment from '../screens/PaymentScreen';
 import GameProgress from '../screens/GameProgress';
+import Scan from '../screens/ImagePicker';
+import AuthScreen from '../screens/AuthScreen';
 const gamesNavigator = createStackNavigator(
   {
     Home: {
@@ -21,6 +23,9 @@ const gamesNavigator = createStackNavigator(
     },
     GameProgress: {
       screen: GameProgress
+    },
+    BarCodeScanner: {
+      screen: Scan
     }
   },
   {
@@ -31,4 +36,20 @@ const gamesNavigator = createStackNavigator(
     }
   }
 );
-export default createAppContainer(gamesNavigator);
+const authNavigator = createStackNavigator(
+  {
+    AuthScreen
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#a4814c'
+      }
+    }
+  }
+);
+const mainNavigator = createSwitchNavigator({
+  Auth: authNavigator,
+  Games: gamesNavigator
+});
+export default createAppContainer(mainNavigator);

@@ -53,15 +53,14 @@ class Scan extends Component {
     console.log(prop);
   }
 
-  renderMessage(props) {
+  renderMessage(navigate) {
     if (this.state.scannedItem && this.state.scannedItem.type) {
       const { type, data } = this.state.scannedItem;
-
-      this.navigate(props);
+      navigate('GameProgress');
     }
     return (
       <Text style={styles.scanScreenMessage}>
-        Focus the QRCode to scan for game {this.props.gameno}.
+        QRCode to scan for game {this.props.gameno}.
       </Text>
     );
   }
@@ -78,6 +77,7 @@ class Scan extends Component {
 
   render() {
     const { hasCameraPermission } = this.state;
+    const { navigate } = this.props.navigation;
 
     if (hasCameraPermission === null) {
       return <Text>Requesting for camera permission</Text>;
@@ -93,7 +93,7 @@ class Scan extends Component {
             style={StyleSheet.absoluteFill}
             barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
           />
-          {this.renderMessage(this.props)}
+          {this.renderMessage(navigate)}
         </View>
       </View>
     );

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import Game from '../models/games';
-import Scan from '../components/ImagePicker';
+import Scan from './ImagePicker';
 
 const GameStartScreen = props => {
   const gameNo = props.navigation.getParam('GameNo');
@@ -37,7 +37,12 @@ const GameStartScreen = props => {
           </View>
         </View>
       ) : (
-        <Scan gameno={gameNo} />
+        props.navigation.navigate({
+          routeName: 'BarCodeScanner',
+          params: {
+            gameno: gameNo
+          }
+        })
       )}
     </Fragment>
   );
