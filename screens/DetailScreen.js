@@ -16,7 +16,7 @@ export default class DetailScreen extends Component {
     };
   }
 
-  render() {
+  render(props) {
     const state = this.state;
     const element = (data, index) => (
       <TouchableOpacity

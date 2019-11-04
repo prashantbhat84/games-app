@@ -27,3 +27,17 @@ output.map(arr2=>{
   
 })
   console.log(status[1])
+
+
+  //code to add  more games to games table use jsbin
+  fetch('https://gaming-application-dba5c.firebaseio.com/games.json',{
+  method:"POST",
+  headers:{
+    'Content-Type':'application/json'
+  },
+  body:JSON.stringify({
+    title:'Patriot2',
+    price:'20500',
+    gameid:'game5'
+  })
+})

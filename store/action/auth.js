@@ -1,6 +1,7 @@
 export const SIGNUP = 'SIGNUP';
 export const LOGIN = 'LOGIN';
-export const signup = (email, password) => {
+import { useSelector } from 'react-redux';
+export const signup = (email, password, games) => {
   return async dispatch => {
     const response = await fetch(
       'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB0DJ6WKIcvdh5Su1KIFxdUKAUJ8TvubWU ',
@@ -20,6 +21,7 @@ export const signup = (email, password) => {
       const errResData = await response.json();
 
       const errID = errResData.error.message;
+
       let message = 'Something went wrong';
       if (errID === 'EMAIL_EXISTS') {
         message = 'This Email already exists';
@@ -27,7 +29,21 @@ export const signup = (email, password) => {
       throw new Error(message);
     }
     const resData = await response.json();
-    console.log(resData);
+    games.map(game => {
+      game.purchase = false;
+      game.uid = resData.localId;
+      fetch(
+        `https://gaming-application-dba5c.firebaseio.com/users/${resData.localId}.json`,
+        {
+          method: 'POST',
+          headers: {
+            ContentType: 'application/json'
+          },
+          body: JSON.stringify(game)
+        }
+      );
+    });
+
     dispatch({
       type: 'SIGNUP',
       token: resData.idToken,

@@ -5,8 +5,9 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import AuthReducer from './store/reducer/auth';
+import GamesReducer from './store/reducer/gamelist';
 
-const rootReducer = combineReducers({ Auth: AuthReducer });
+const rootReducer = combineReducers({ Auth: AuthReducer, Games: GamesReducer });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 

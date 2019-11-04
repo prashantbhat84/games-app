@@ -1,9 +1,10 @@
 class Game {
-  constructor(id, title, purchaseStatus, playStatus, price) {
+  constructor(id, gameid, title, price, purchase) {
     this.id = id;
+    this.gameid = gameid;
     this.title = title;
-    this.purchaseStatus = purchaseStatus;
-    this.playstatus = playStatus;
+    this.purchase = purchase;
+
     this.price = price;
   }
 }

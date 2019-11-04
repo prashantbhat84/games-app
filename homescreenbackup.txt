@@ -1,15 +1,7 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { Button, Text, StyleSheet, View, FlatList } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-import * as GameListActions from '../store/action/gameslist';
-const HomeScreen = props => {
-  const dispatch = useDispatch();
-  const games = useSelector(state => state.Games.loadedGames);
-  const userid = useSelector(state => state.Auth.userID);
-  useEffect(() => {
-    dispatch(GameListActions.fetchgames());
-  }, [dispatch]);
 
+const HomeScreen = props => {
   const renderListItem = itemData => {
     return (
       <Fragment>
@@ -23,10 +15,8 @@ const HomeScreen = props => {
                 fontSize: 20
               }}
             >
-              <Text
-                style={{ fontSize: 20, fontWeight: 'bold', marginLeft: -30 }}
-              >
-                {itemData.item.gameid}
+              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                {itemData.item.title}
               </Text>
             </View>
             <View style={{ flexDirection: 'row', marginLeft: 100 }}>
@@ -42,8 +32,7 @@ const HomeScreen = props => {
                     props.navigation.navigate({
                       routeName: 'Detail',
                       params: {
-                        gameName: itemData.item.title,
-                        userid: userid
+                        gameName: itemData.item.title
                       }
                     });
                   }}
@@ -61,10 +50,8 @@ const HomeScreen = props => {
                 fontSize: 20
               }}
             >
-              <Text
-                style={{ fontSize: 20, fontWeight: 'bold', marginLeft: -30 }}
-              >
-                {itemData.item.gameid}
+              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                {itemData.item.title}
               </Text>
             </View>
             <View style={{ flexDirection: 'row', marginLeft: 100 }}>
@@ -81,8 +68,7 @@ const HomeScreen = props => {
                       routeName: 'Payment',
                       params: {
                         Price: itemData.item.price,
-                        GameName: itemData.item.title,
-                        userid: userid
+                        GameName: itemData.item.title
                       }
                     });
                   }}
@@ -98,7 +84,22 @@ const HomeScreen = props => {
   return (
     <View style={styles.screen}>
       <FlatList
-        data={games}
+        data={[
+          {
+            title: 'Prashant',
+            id: '1',
+            purchase: true,
+            status: 'completed',
+            price: '500'
+          },
+          {
+            title: 'Sellcraft',
+            id: '2',
+            purchase: false,
+            status: 'incomplete',
+            price: '1500'
+          }
+        ]}
         renderItem={renderListItem}
         keyExtractor={(item, index) => item.id}
       />
@@ -111,7 +112,7 @@ HomeScreen.navigationOptions = {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    marginTop: 5,
+    marginTop: 100,
     justifyContent: 'center',
     alignItems: 'center',
     fontWeight: '900'

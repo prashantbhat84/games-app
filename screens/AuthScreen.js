@@ -13,8 +13,9 @@ import Card from '../components/UI/Card';
 import Colors from '../constants/Colors';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as AuthActions from '../store/action/auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
+import * as GameListActions from '../store/action/gameslist';
 
 const formReducer = (state, action) => {
   if (action.type === FORM_INPUT_UPDATE) {
@@ -43,12 +44,16 @@ const AuthScreen = props => {
   const [isSignup, setIsSignUp] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
+  const games = useSelector(state => state.Games.loadedGames);
   const dispatch = useDispatch();
   useEffect(() => {
     if (error) {
       Alert.alert('An Error occured', error, [{ text: 'OK' }]);
     }
   }, [error]);
+  useEffect(() => {
+    dispatch(GameListActions.fetchgames());
+  }, [dispatch]);
   const signupHandler = async () => {
     let action;
     if (isSignup) {
@@ -59,7 +64,8 @@ const AuthScreen = props => {
     } else {
       action = AuthActions.signup(
         formState.inputValues.email,
-        formState.inputValues.password
+        formState.inputValues.password,
+        games
       );
     }
     setIsLoading(true);
