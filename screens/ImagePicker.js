@@ -56,7 +56,13 @@ class Scan extends Component {
   renderMessage(navigate) {
     if (this.state.scannedItem && this.state.scannedItem.type) {
       const { type, data } = this.state.scannedItem;
-      navigate('GameProgress');
+      console.log(`QR code from renderMessage ${data}`);
+      navigate({
+        routeName: 'GameProgress',
+        params: {
+          QRCode: data
+        }
+      });
     }
     return (
       <Text style={styles.scanScreenMessage}>
@@ -87,7 +93,7 @@ class Scan extends Component {
     }
     return (
       <View style={styles.container}>
-        <View style={{ flex: 1, height: 300 }}>
+        <View style={{ flex: 1, height: 50 }}>
           <BarCodeScanner
             onBarCodeScanned={this.onBarCodeRead}
             style={StyleSheet.absoluteFill}
@@ -105,7 +111,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 15,
     backgroundColor: '#fff',
-    height: 500
+    height: 50
   },
   scanScreenMessage: {
     fontSize: 20,
@@ -114,7 +120,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 300,
-    height: 300
+    height: 100
   }
 });
 export default Scan;

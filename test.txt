@@ -40,4 +40,17 @@ output.map(arr2=>{
     price:'20500',
     gameid:'game5'
   })
+}).then(res=>{
+  console.log(res.status)
 })
+
+//configs for firebaseio
+const firebaseConfig = {
+  apiKey: "AIzaSyB0DJ6WKIcvdh5Su1KIFxdUKAUJ8TvubWU",
+  authDomain: "gaming-application-dba5c.firebaseapp.com",
+  databaseURL: "https://gaming-application-dba5c.firebaseio.com",
+  projectId: "gaming-application-dba5c",
+  storageBucket: "gaming-application-dba5c.appspot.com",
+  messagingSenderId: "63237393870",
+  appId: "1:63237393870:web:038b9759c580d228382f9f"
+};

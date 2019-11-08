@@ -52,4 +52,4 @@ const mainNavigator = createSwitchNavigator({
   Auth: authNavigator,
   Games: gamesNavigator
 });
-export default createAppContainer(mainNavigator);
+export default createAppContainer(gamesNavigator);
